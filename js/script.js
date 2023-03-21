@@ -40,3 +40,31 @@ Consigli del giorno:
             indicare quanti e quali sono corretti
 
 */
+
+const htmlRandomNumbers = document.getElementById("random-numbers");
+const btnGenerateNumbers = document.getElementById("generate-numbers");
+
+//aggiungiamo un eventListener al btn per generare i numeri dopo il click
+btnGenerateNumbers.addEventListener("click", function(){
+
+    //generiamo 5 numeri casuali
+    function getRandomInt(min, max) {
+        //creiamo un array vuoto e attraverso un ciclo while ci assicuriamo che i numeri all'interno non siano più di 5
+        const randomNumbers = [];
+        while (randomNumbers.length < 5) {
+            let number = Math.floor(Math.random() * (max - min + 1)) + min;
+            //tramite il metodo degli array includes, verifichiamo che il numero generato !sia presente nell'array randomNumbers
+            if (!randomNumbers.includes(number)) {
+                //se non c'è lo inseriamo
+                randomNumbers.push(number);
+            }
+        }
+        return randomNumbers;
+    }
+
+    //richiamiamo la funzione che genera i numeri e attribuiamo i valori (min, max)
+    const randomNumbers = getRandomInt(1, 50);
+    //join ci permette di formattare gli elementi dell'array che verranno inseriti all'interno del paragrafo
+    htmlRandomNumbers.textContent = randomNumbers.join(" - ");
+})
+
